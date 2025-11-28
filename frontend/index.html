@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snapshot Claim DApp</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎁 Snapshot Claim DApp</h1>
+            <p class="subtitle">Claim tokens based on snapshot with sybil-resistance</p>
+        </header>
+
+        <div class="wallet-section">
+            <button id="connectBtn" class="btn btn-primary">Connect Wallet</button>
+            <div id="walletInfo" style="display:none;">
+                <p><strong>Address:</strong> <span id="userAddress"></span></p>
+                <p><strong>Network:</strong> <span id="networkName"></span></p>
+            </div>
+        </div>
+
+        <div id="claimSection" style="display:none;">
+            <div class="card">
+                <h2>📊 Your Claim Status</h2>
+                
+                <div class="status-grid">
+                    <div class="status-item">
+                        <label>Snapshot Balance:</label>
+                        <span id="snapshotBalance" class="value">-</span>
+                    </div>
+                    
+                    <div class="status-item">
+                        <label>Claim Amount:</label>
+                        <span id="claimAmount" class="value">-</span>
+                    </div>
+                    
+                    <div class="status-item">
+                        <label>Sybil Score:</label>
+                        <span id="sybilScore" class="value score">-</span>
+                    </div>
+                    
+                    <div class="status-item">
+                        <label>Penalty Applied:</label>
+                        <span id="penaltyAmount" class="value">-</span>
+                    </div>
+                </div>
+
+                <div id="riskWarning" class="warning" style="display:none;">
+                    <strong>⚠️ Warning:</strong> Your address has been flagged with sybil-like behavior. 
+                    A penalty will be applied to your claim amount.
+                    <div id="riskFlags"></div>
+                </div>
+
+                <div id="eligibilityStatus"></div>
+
+                <button id="claimBtn" class="btn btn-success" disabled>
+                    <span id="claimBtnText">Check Eligibility</span>
+                </button>
+
+                <div id="txStatus" style="display:none;"></div>
+            </div>
+
+            <div class="card">
+                <h2>ℹ️ Claim Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Snapshot Block:</label>
+                        <span id="snapshotBlock">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Claim End Time:</label>
+                        <span id="claimEndTime">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Total Claimed:</label>
+                        <span id="totalClaimed">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Your Status:</label>
+                        <span id="claimStatus">Not Checked</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🛡️ Sybil Resistance Criteria</h2>
+                <ul class="criteria-list">
+                    <li>
+                        <strong>Holding Duration:</strong> Accounts with < 7 days holding receive 20% penalty
+                    </li>
+                    <li>
+                        <strong>Transaction Count:</strong> Accounts with < 5 transactions receive 15% penalty
+                    </li>
+                    <li>
+                        <strong>Sybil Score:</strong> High-risk scores (>70) receive 50% penalty
+                    </li>
+                    <li>
+                        <strong>Blacklist:</strong> Flagged addresses cannot claim
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
