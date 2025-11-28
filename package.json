@@ -1,0 +1,30 @@
+{
+  "name": "snapshot-claim-dapp",
+  "version": "1.0.0",
+  "description": "Snapshot-based token claim DApp with sybil-resistance mechanism",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "hardhat run scripts/1-deploy.js --network sepolia",
+    "snapshot": "hardhat run scripts/2-takeSnapshot.js --network sepolia",
+    "merkle": "node scripts/3-generateMerkleTree.js",
+    "sybil": "node scripts/4-checkSybil.js",
+    "test": "hardhat test",
+    "full-setup": "npm run snapshot && npm run sybil && npm run merkle"
+  },
+  "keywords": ["airdrop", "snapshot", "merkle", "sybil-resistance", "web3"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^16.0.3",
+    "ethers": "^6.8.0",
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.3.11"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0"
+  }
+}
